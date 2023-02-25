@@ -12,7 +12,7 @@ export const authOptions = {
 
   providers: [
     CredentialsProvider({
-      async authorize(credentials, res) {
+      async authorize(credentials) {
         const client = await connectToDB();
 
         const usersCollection = client.db().collection("users");
