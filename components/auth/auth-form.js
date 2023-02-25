@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
 import classes from "./auth-form.module.css";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 // import { getSession } from "next-auth/react";
 // import { useRouter } from "next/router";
 function AuthForm() {
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [isError, setIsError] = useState();
   const [isErrorLogin, setIsErrorLogin] = useState();
@@ -26,6 +28,10 @@ function AuthForm() {
       });
       setIsErrorLogin(result.error);
       console.log(result.error);
+      if (!result.error) {
+        router.replace("/");
+        // window.location.href = "/";
+      }
     } else {
       try {
         const result = await createNewUser(email, password);

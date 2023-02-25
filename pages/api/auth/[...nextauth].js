@@ -5,7 +5,7 @@ import NextAuth from "next-auth";
 // import { SessionProvider } from "next-auth/react";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+export const authOptions = {
   session: {
     jwt: true,
   },
@@ -43,4 +43,6 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
