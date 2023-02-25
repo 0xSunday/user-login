@@ -30,7 +30,6 @@ function AuthForm() {
       console.log(result.error);
       if (!result.error) {
         router.replace("/");
-        // window.location.href = "/";
       }
     } else {
       try {

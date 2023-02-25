@@ -1,8 +1,6 @@
 import { verifyPassword } from "@/lib/authPassword";
 import { connectToDB } from "@/lib/db";
 import NextAuth from "next-auth";
-// import Providers from `next-auth/providers`
-// import { SessionProvider } from "next-auth/react";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
@@ -20,26 +18,24 @@ export const authOptions = {
         const user = await usersCollection.findOne({
           email: credentials.email,
         });
+
         if (!user) {
           client.close();
-          throw new Error("user dosen't exist !!");
+          throw new Error("No user found!");
         }
 
-        const verifyPas = await verifyPassword(
+        const isValid = await verifyPassword(
           credentials.password,
           user.password
         );
-        if (user && !verifyPas) {
+
+        if (!isValid) {
           client.close();
-          throw new Error("wrong passowrd");
-        }
-        if (!verifyPas) {
-          client.close();
-          throw new Error("could not log you in !!");
+          throw new Error("wrong password !!");
         }
 
-        return { email: user.email };
         client.close();
+        return { email: user.email };
       },
     }),
   ],
