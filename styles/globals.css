@@ -18,7 +18,11 @@ h6 {
   font-family: "Lato", sans-serif;
 }
 
-.erorr {
+.redP {
   color: red;
+  padding: 2px;
+}
+.greenP {
+  color: white;
   padding: 2px;
 }
