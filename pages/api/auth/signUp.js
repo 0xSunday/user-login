@@ -33,14 +33,14 @@ async function handler(req, res) {
     res.status(422).json({ message: "user already exist !!" });
     return;
   }
-  const hashedPassword = hashPassword(password);
+  const hashedPassword = await hashPassword(password);
 
   const result = await db.collection("users").insertOne({
     email: email,
     password: hashedPassword,
   });
 
-  res.status(201).json({ message: "Created user!" });
+  res.status(201).json({ message: "User Created!" });
   client.close();
 }
 export default handler;
