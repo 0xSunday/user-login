@@ -39,6 +39,8 @@ export const authOptions = {
       },
     }),
   ],
+
+  secret: "IamVeryHandsome",
 };
 
 export default NextAuth(authOptions);
